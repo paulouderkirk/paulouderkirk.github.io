@@ -1,0 +1,27 @@
+---
+layout: post
+title: Browser screenshots on a Linux server
+categories:
+- linux
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+author:
+  login: admin
+  email: paul@ouderkirk.ca
+  display_name: admin
+  first_name: Paul
+  last_name: Ouderkirk
+---
+<p>Web screenshots from a headless Linux server</p>
+<p>On Ubuntu 10.04.3 AMD64</p>
+<pre>$ sudo apt-get install xvfb xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x-ttcidfont-conf
+$ sudo apt-get install python-qt4 libqt4-webkit
+$ curl -OL https://raw.github.com/AdamN/python-webkit2png/master/webkit2png.py
+$ chmod +x webkit2png.py
+$ export DISPLAY=localhost:99.0
+$ Xvfb :99 -screen 0 1600x1200x24+32 &amp;
+$ ./webkit2png.py -o paul.ouderkirk.ca.png "http://paul.ouderkirk.ca"</pre>

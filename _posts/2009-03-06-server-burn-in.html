@@ -1,0 +1,35 @@
+---
+layout: post
+title: Server Burn-in
+categories:
+- Collected Wisdom
+- linux
+tags:
+- linux
+- openoffice
+- servers
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+author:
+  login: admin
+  email: paul@ouderkirk.ca
+  display_name: admin
+  first_name: Paul
+  last_name: Ouderkirk
+---
+<p>I used to burn-in new servers by having them compile MySQL from source in a loop for 24-48 hours, but let's face it, that's not much of a challenge for today's servers.</p>
+<p>You know what is?  Building OpenOffice.org.<br />
+<!--more--><br />
+On Debian Lenny, here's the shortest path:<br />
+<code><br />
+# apt-get install build-essential dpkg-dev pbuilder<br />
+# apt-get source openoffice.org<br />
+# apt-get build-dep openoffice.org<br />
+# cd openoffice.org-2.4.1<br />
+# debuild -us -uc<br />
+</code></p>
+<p>On a Sun x4100 with dual Opteron 275s and 8GB RAM, this takes about 5.5 hours, and uses way more disk I/O and memory than a mere MySQL compile.</p>
+<p>Run this 4-5 times and you can probably feel pretty safe that your server won't burst into flames at 3AM the day after you deploy it in production.</p>

@@ -1,0 +1,72 @@
+---
+layout: post
+title: Accessing FileVault2 Volumes from Disk Images
+categories:
+- Collected Wisdom
+tags:
+- disk image
+- filevault
+- os x
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  videourl: ''
+author:
+  login: admin
+  email: paul@ouderkirk.ca
+  display_name: admin
+  first_name: Paul
+  last_name: Ouderkirk
+---
+<p>Accessing a FileVault2 Volume in a RAW disk image</p>
+<pre>$ hdiutil attach -nomount disk.img
+/dev/disk10 GUID_partition_scheme
+/dev/disk10s1 EFI
+/dev/disk10s2 Apple_CoreStorage
+/dev/disk10s3 Apple_Boot</pre>
+<pre>$ diskutil cs list
+CoreStorage logical volume groups (1 found)
+|
++-- Logical Volume Group 672AD5D8-4F64-4544-846E-2FA10A3081E5
+ =========================================================
+ Name: Macintosh HD
+ Status: Online
+ Size: 499418034176 B (499.4 GB)
+ Free Space: 16777216 B (16.8 MB)
+ |
+ +-&lt; Physical Volume A6ECBB7E-9D2D-44C1-81CD-BDB49F30C838
+ | ----------------------------------------------------
+ | Index: 0
+ | Disk: disk10s2
+ | Status: Online
+ | Size: 499418034176 B (499.4 GB)
+ |
+ +-&gt; Logical Volume Family AA02C9B4-C0C1-41C9-9CFE-07457D86484C
+ ----------------------------------------------------------
+ Encryption Status: Locked
+ Encryption Type: AES-XTS
+ Conversion Status: Complete
+ Conversion Direction: -none-
+ Has Encrypted Extents: Yes
+ Fully Secure: Yes
+ Passphrase Required: Yes
+ |
+ +-&gt; Logical Volume 479424EF-4A7C-40E2-A0A4-2F8C5A75B878
+ ---------------------------------------------------
+ Disk: -none-
+ Status: Locked
+ Size (Total): 499082485760 B (499.1 GB)
+ Conversion Progress: -none-
+ Revertible: Yes (unlock and decryption required)
+ LV Name: Macintosh HD
+ Content Hint: Apple_HFS</pre>
+<pre>$ diskutil cs unlockVolume 479424EF-4A7C-40E2-A0A4-2F8C5A75B878
+Passphrase:
+Started CoreStorage operation
+Logical Volume successfully unlocked
+Logical Volume successfully attached as disk11
+Logical Volume successfully mounted as /Volumes/Macintosh HD 1
+Core Storage disk: disk11
+Finished CoreStorage operation</pre>

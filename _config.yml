@@ -1,0 +1,12 @@
+# Site settings
+title: Guerilla Sysadmin
+email: paul@ouderkirk.ca
+description: "You'll have to get used to @pdo, he suffers from a deplorable excess of personality, especially for a sysadmin"
+baseurl: ""
+url: "http://paul.ouderkirk.ca"
+twitter_username: pdo
+github_username:  paulouderkirk
+
+# Build settings
+markdown: kramdown
+permalink: pretty

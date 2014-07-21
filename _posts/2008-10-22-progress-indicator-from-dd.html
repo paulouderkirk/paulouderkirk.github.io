@@ -1,0 +1,29 @@
+---
+layout: post
+title: Progress indicator from dd
+categories:
+- linux
+tags:
+- dd
+- gnu
+- linux
+- nerdery
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+author:
+  login: admin
+  email: paul@ouderkirk.ca
+  display_name: admin
+  first_name: Paul
+  last_name: Ouderkirk
+---
+<p>Yes, you can get a progress indicator from dd.  Here's the relevant section from the GNU dd manpage:</p>
+<blockquote><p>Sending a USR1 signal to a running `dd'  process  makes  it  print  I/O<br />
+statistics to standard error and then resume copying.</p>
+<p>$ dd if=/dev/zero of=/dev/null&amp; pid=$!<br />
+$ kill -USR1 $pid; sleep 1; kill $pid</p>
+<p>18335302+0  records  in  18335302+0 records out 9387674624 bytes<br />
+(9.4 GB) copied, 34.6279 seconds, 271 MB/s</p></blockquote>

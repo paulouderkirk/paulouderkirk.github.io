@@ -1,0 +1,21 @@
+---
+layout: post
+title: When does my SSL certificate expire?
+categories:
+- linux
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+author:
+  login: admin
+  email: paul@ouderkirk.ca
+  display_name: admin
+  first_name: Paul
+  last_name: Ouderkirk
+---
+<p>Quick and dirty method for checking the expiration data on an SSL certificate:</p>
+<pre>$ echo "" | openssl s_client -connect paul.ouderkirk.ca:443 2&gt; /dev/null | openssl x509 -noout -enddate</pre>
+<pre>notAfter=Dec 29 05:00:47 2012 GMT</pre>
